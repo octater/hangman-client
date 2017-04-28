@@ -1,2 +1,35 @@
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
+$background-color: #4e4e4e;
+$font-color: #dfdfdf;
+$white: #fff;
+$black: #000;
+
+// body {
+//   background-color: $background-color;
+//   color: $font-color;
+// }
+
+h1 {
+  padding-bottom: 30px;
+  text-align: center;
+
+}
+
+.box {
+  border: 1px solid $black;
+  box-sizing: border-box;
+  height: 200px;
+}
+
+.playerup {
+  border: 1px solid $black;
+  box-sizing: border-box;
+  font-size: 20px;
+  height: 100px;
+  margin: 5% 20%;
+  // padding-top: 100px;
+  text-align: center;
+  width: 50%;
+
+}
