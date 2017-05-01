@@ -26,7 +26,7 @@ const onSignIn = function (event) {
 
   // console.log('made it to onSignIn, data is: ', data)
   if (player1.user.id !== 0) {
-    const title = 'Danger Will Robinson'
+    const title = 'ERROR'
     const body = 'User is are already signed in.  Please sign-out'
     $('#alert-modal-title').html(title)
     $('#alert-modal-body').html(body)

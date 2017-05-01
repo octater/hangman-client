@@ -5,7 +5,7 @@ const player1 = require('../player1.js')
 const config = require('../config')
 
 const signUp = function (data) {
-  // console.log('here is my data: ', data)
+  console.log('here is my data: ', data)
   return $.ajax({
     url: config.apiOrigin + '/sign-up/',
     method: 'POST',

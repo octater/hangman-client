@@ -5,9 +5,6 @@ const player1 = require('../player1.js')
 const signUpSuccess = (data) => {
   // console.log('ui success: ', data)
   $('#signUp').modal('hide')
-  $('#signUp').on('hidden', function () {
-    $(this).removeData('#signUp')
-  })
 }
 
 const signUpFailure = (error) => {
@@ -20,11 +17,11 @@ const signUpFailure = (error) => {
 }
 
 const signInSuccess = (data) => {
-  // console.log('signInSuccess data is: ', data)
+  console.log('signInSuccess data is: ', data)
   // if (Object.keys(player1).length === 0) {
   if (player1.user.id === 0) {
     player1.user = data.user
-    // console.log('success log, signin player1 is ', player1)
+    console.log('success log, signin player1 is ', player1)
   }
 
   $('#signIn').modal('hide')

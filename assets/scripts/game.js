@@ -1,10 +1,12 @@
 'use strict'
 
 const game = {
-  playerup: 1,
-  clicks: 0,
-  gameOver: 0,
-  isReady: 'N'
+  lettersPlayed: 0,
+  userId: 0,
+  phraseId: 0,
+  gameStatus: 0,
+  bodyParts: 0,
+  gameOver: 'N'
 }
 
 module.exports = game
