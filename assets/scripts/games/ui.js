@@ -65,7 +65,7 @@ const updateMoveSuccess = (data) => {
 
 const updateMoveFailure = (error) => {
   // console.error('createGameFailiure log', error)
-  const title = 'Danger Will Robinson'
+  const title = 'ERROR'
   const body = 'Error with move update for the game -- ' + error.statusText
   $('#alert-modal-title').html(title)
   $('#alert-modal-body').html(body)

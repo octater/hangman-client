@@ -1,6 +1,8 @@
 'use strict'
 
 const player1 = require('../player1.js')
+const game = require('../game.js')
+// const ui = require('../games/ui.js')
 
 const signUpSuccess = (data) => {
   // console.log('ui success: ', data)
@@ -9,7 +11,7 @@ const signUpSuccess = (data) => {
 
 const signUpFailure = (error) => {
   // console.error('failiure log', error)
-  const title = 'Danger Will Robinson'
+  const title = 'ERROR'
   const body = 'Error with sign-up -- ' + error.statusText
   $('#alert-modal-title').html(title)
   $('#alert-modal-body').html(body)
@@ -29,7 +31,7 @@ const signInSuccess = (data) => {
 
 const signInFailure = (error) => {
   // console.error('signInFailiure log', error)
-  const title = 'Danger Will Robinson'
+  const title = 'ERROR'
   const body = 'Error with sign-in -- ' + error.statusText
   $('#alert-modal-title').html(title)
   $('#alert-modal-body').html(body)
@@ -40,22 +42,23 @@ const signOutSuccess = () => {
   player1.user.id = 0
   // console.log('success log, signout player1 is ', player1)
 
+  game.lettersPlayed = 0
+  game.gameStatus = 0
+  game.bodyParts = 0
+  game.gameOver = 'N'
+
+  $('.hangman-frames').css('opacity', 0)
+  $('#hangman-frame0').css('opacity', 1)
+  resetAlphabetKeypad()
+  // removeGraveyardLetters()
+  removeCorrectlyGuessedLetters()
+  removeFillInTheBlanksAroundOldWord()
   $('#signOut').modal('hide')
-  $('#box1').css('background-color', '#fff')
-  $('#box2').css('background-color', '#fff')
-  $('#box3').css('background-color', '#fff')
-  $('#box4').css('background-color', '#fff')
-  $('#box5').css('background-color', '#fff')
-  $('#box6').css('background-color', '#fff')
-  $('#box7').css('background-color', '#fff')
-  $('#box8').css('background-color', '#fff')
-  $('#box9').css('background-color', '#fff')
-  $('#player-now-up').text(' ')
 }
 
 const signOutFailure = (error) => {
   // console.error('signOutFailiure log', error)
-  const title = 'Danger Will Robinson'
+  const title = 'ERROR'
   const body = 'Error with sign-out -- ' + error.statusText
   $('#alert-modal-title').html(title)
   $('#alert-modal-body').html(body)
@@ -69,11 +72,27 @@ const changePasswordSuccess = () => {
 
 const changePasswordFailure = (error) => {
   // console.error('change password Failiure log', error)
-  const title = 'Danger Will Robinson'
+  const title = 'ERROR'
   const body = 'Error with changing password -- ' + error.statusText
   $('#alert-modal-title').html(title)
   $('#alert-modal-body').html(body)
   $('#alert-modal').modal('show')
+}
+
+function resetAlphabetKeypad () {
+  $('#alphabet-keypad > .letter-disabled').each(function (index, element) {
+    $(element).removeClass().addClass('letter-button')
+  })
+}
+
+function removeCorrectlyGuessedLetters () {
+  $('#word-to-guess').each(function (index, element) {
+    $(element).children().html('')
+  })
+}
+
+function removeFillInTheBlanksAroundOldWord () {
+  $('#word-to-guess').html('')
 }
 
 module.exports = {

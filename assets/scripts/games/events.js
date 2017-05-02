@@ -23,7 +23,7 @@ const onPlayGame = function (event) {
   if (player1.user.id === 0) {
     console.log('user player1 requested new game ', player1)
     const title = 'ERROR'
-    const body = 'Player 1 must be signed in before creating a new game'
+    const body = 'Player must be signed in before creating a new game'
     $('#alert-modal-title').html(title)
     $('#alert-modal-body').html(body)
     $('#alert-modal').modal('show')
@@ -74,6 +74,15 @@ const purgeMyStats = function () {
     return
   }
 
+  if (game.gameOver === 'N') {
+    // console.log('user player1 requested game stats ', player1)
+    const title = 'ERROR'
+    const body = 'Please finish current game prior to deleting games.'
+    $('#alert-modal-title').html(title)
+    $('#alert-modal-body').html(body)
+    $('#alert-modal').modal('show')
+    return
+  }
   // console.log('made it to my stats logic: ', player1)
 
   api.myStats()
@@ -90,8 +99,10 @@ function pickLetter () {
     $('#alert-modal-body').html(body)
     $('#alert-modal').modal('show')
     return
-  } else {
-        // console.log('player1 info is: ', player1)
+  }
+
+  if (game.gameOver === 'Y') {
+    return
   }
 
   let letterPicked = $(this)
@@ -141,6 +152,7 @@ function handlePickedLetter (letterPicked) {
     addBodyPart()
     displayGameOverMessageOnLose()
   }
+  updtGame()
 }
 
 function displayCongratulatoryMessageOnWin () {
@@ -148,6 +160,8 @@ function displayCongratulatoryMessageOnWin () {
   console.log('here is the correctly guessed letter count: ', correctlyGuessedLettersCount)
   console.log('here is the length of the phrase: ', gamePhrase.content.phrase_content.length)
   if (correctlyGuessedLettersCount === gamePhrase.content.phrase_content.length) {
+    game.gameOver = 'Y'
+    game.gameStatus = 1
     $('#congratulatory_message').modal('show')
     const gameWinnerMessage = "Congratulations, you've won the game in only - '" + game.lettersPlayed + "' letters"
     $('.winmess').text(gameWinnerMessage)
@@ -164,6 +178,8 @@ function displayGameOverMessageOnLose () {
     // if (incorrectlyGuessedLettersCount === 7) {
   console.log('here is the number of incorrect guesses: ', game.bodyParts)
   if (game.bodyParts === 7) {
+    game.gameOver = 'Y'
+    game.gameStatus = 2
     $('#gameover_message').modal('show')
     const gameOverMessage = "You took too many tries to guess the word. The correct word is - '" + gamePhrase.content.phrase_content + "'"
     $('.losemess').text(gameOverMessage)
@@ -247,6 +263,14 @@ function setWordToBeGuessed () {
 
     guessWordBlock.appendChild(domElem)
   })
+}
+
+const updtGame = function () {
+  // event.preventDefault()
+  // const data = getFormFields(event.target)
+  api.updateMove()
+  .done(ui.updateMoveSuccess)
+  .fail(ui.updateMoveFailure)
 }
 
 const addHandlers = () => {

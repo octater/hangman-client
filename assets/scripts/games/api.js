@@ -2,7 +2,7 @@
 
 // const app = require('../app')
 const player1 = require('../player1')
-// const game = require('../game.js')
+const game = require('../game.js')
 const gamePhrase = require('../gamePhrase.js')
 const config = require('../config')
 
@@ -10,31 +10,29 @@ const config = require('../config')
 
  // authApi.signUp(authUi.success, authUi.failure, data);
 
-// const updateMove = function (inData) {
-//   // console.log('here is my current move inData from within updateMove: ', inData)
-//
-//   const data = {
-//     'game': {
-//       'cell': {
-//         'index': inData.game.cell.index,
-//         'value': inData.game.cell.value
-//       },
-//       'over': inData.game.over
-//     }
-//   }
-//   // console.log('here is my current move data from within updateMove: ', data)
-//   // console.log('here is game object in updateMove: ', game)
-//   // console.log('here is player1 object in updateMove: ', player1)
-//
-//   return $.ajax({
-//     url: config.apiOrigin + '/games/' + game.game.id,
-//     method: 'PATCH',
-//     headers: {
-//       Authorization: 'Token token=' + player1.user.token
-//     },
-//     data
-//   })
-// }
+const updateMove = function () {
+   // console.log('here is my current move inData from within updateMove: ', inData)
+
+  const data = {
+    'game': {
+      'letters_played': game.lettersPlayed,
+      'game_status': game.gameStatus
+    }
+  }
+
+  console.log('here is my current move data from within updateMove: ', data)
+  console.log('here is game object in updateMove: ', game)
+  console.log('here is player1 object in updateMove: ', player1)
+
+  return $.ajax({
+    url: config.apiOrigin + '/games/' + game.game.id,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Token token=' + player1.user.token
+    },
+    data
+  })
+}
 
 const getPhrase = function () {
   return $.ajax({
@@ -93,6 +91,6 @@ module.exports = {
   playGame,
   getPhrase,
   purgeGame,
-  // updateMove,
+  updateMove,
   myStats
 }

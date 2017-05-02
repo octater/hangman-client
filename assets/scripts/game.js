@@ -6,7 +6,7 @@ const game = {
   phraseId: 0,
   gameStatus: 0,
   bodyParts: 0,
-  gameOver: 'N'
+  gameOver: 'Y'
 }
 
 module.exports = game

@@ -44,7 +44,7 @@ const onSignOut = function (event) {
   const data = getFormFields(event.target)
 
   if (player1.user.id === 0) {
-    const title = 'Danger Will Robinson'
+    const title = 'ERROR'
     const body = 'Player is already signed out.  Please sign in to play'
     $('#alert-modal-title').html(title)
     $('#alert-modal-body').html(body)
@@ -62,7 +62,7 @@ const onChangePassword = function (event) {
   const data = getFormFields(event.target)
 
   if (player1.user.id === 0) {
-    const title = 'Danger Will Robinson'
+    const title = 'ERROR'
     const body = 'Player is not signed in.  You must be signed in to change your password'
     $('#alert-modal-title').html(title)
     $('#alert-modal-body').html(body)
