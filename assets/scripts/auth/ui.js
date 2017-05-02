@@ -19,11 +19,11 @@ const signUpFailure = (error) => {
 }
 
 const signInSuccess = (data) => {
-  console.log('signInSuccess data is: ', data)
+  // console.log('signInSuccess data is: ', data)
   // if (Object.keys(player1).length === 0) {
   if (player1.user.id === 0) {
     player1.user = data.user
-    console.log('success log, signin player1 is ', player1)
+    // console.log('success log, signin player1 is ', player1)
   }
 
   $('#signIn').modal('hide')
@@ -50,7 +50,6 @@ const signOutSuccess = () => {
   $('.hangman-frames').css('opacity', 0)
   $('#hangman-frame0').css('opacity', 1)
   resetAlphabetKeypad()
-  // removeGraveyardLetters()
   removeCorrectlyGuessedLetters()
   removeFillInTheBlanksAroundOldWord()
   $('#signOut').modal('hide')

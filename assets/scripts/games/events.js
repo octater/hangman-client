@@ -5,7 +5,6 @@ const ui = require('./ui')
 const player1 = require('../player1.js')
 const gamePhrase = require('../gamePhrase.js')
 const game = require('../game.js')
-// const currentMove = require('../current-move.js')
 // const bodyParts = 0
 // let currentWordFull = ' '
 // let currentWord = ' '
@@ -21,7 +20,7 @@ const onPlayGame = function (event) {
 
   // if (Object.keys(player1).length === 0) {
   if (player1.user.id === 0) {
-    console.log('user player1 requested new game ', player1)
+    // console.log('user player1 requested new game ', player1)
     const title = 'ERROR'
     const body = 'Player must be signed in before creating a new game'
     $('#alert-modal-title').html(title)
@@ -92,7 +91,7 @@ const purgeMyStats = function () {
 
 function pickLetter () {
   if (player1.user.id === 0) {
-    console.log('user player1 requested new game ', player1)
+    // console.log('user player1 requested new game ', player1)
     const title = 'ERROR'
     const body = 'Player must be signed in before playing a game'
     $('#alert-modal-title').html(title)
@@ -112,16 +111,16 @@ function pickLetter () {
     .addClass('letter-disabled')
 
   letterPicked = letterPicked.html()
-  console.log('Here is my picked letter ', letterPicked)
-  console.log('here is the phrase object ', gamePhrase)
-  console.log('here is the game object ', game)
+  // console.log('Here is my picked letter ', letterPicked)
+  // console.log('here is the phrase object ', gamePhrase)
+  // console.log('here is the game object ', game)
   handlePickedLetter(letterPicked)
 }
 
 function handlePickedLetter (letterPicked) {
   game.lettersPlayed = game.lettersPlayed + 1
   const resultMatches = []
-  console.log('here is the phrase content ', gamePhrase.content.phrase_content)
+  // console.log('here is the phrase content ', gamePhrase.content.phrase_content)
   let ind = gamePhrase.content.phrase_content.indexOf(letterPicked)
 
   // if letterPicked matches one or more letters in the current word
@@ -143,12 +142,6 @@ function handlePickedLetter (letterPicked) {
     })
   // if letterBlock is not greater than 0 put the letter in the graveyard
   } else {
-    // game.bodyParts = game.bodyParts + 1
-    const domElem = document.createElement('div')
-    domElem.className = 'grave-letter'
-    domElem.innerHTML = letterPicked
-    // document.getElementById('letter-graveyard').appendChild(domElem)
-    // hangmanGraphic.addBodyPart()
     addBodyPart()
     displayGameOverMessageOnLose()
   }
@@ -157,8 +150,8 @@ function handlePickedLetter (letterPicked) {
 
 function displayCongratulatoryMessageOnWin () {
   const correctlyGuessedLettersCount = $('.is-letter > span').length
-  console.log('here is the correctly guessed letter count: ', correctlyGuessedLettersCount)
-  console.log('here is the length of the phrase: ', gamePhrase.content.phrase_content.length)
+  // console.log('here is the correctly guessed letter count: ', correctlyGuessedLettersCount)
+  // console.log('here is the length of the phrase: ', gamePhrase.content.phrase_content.length)
   if (correctlyGuessedLettersCount === gamePhrase.content.phrase_content.length) {
     game.gameOver = 'Y'
     game.gameStatus = 1
@@ -168,15 +161,9 @@ function displayCongratulatoryMessageOnWin () {
   }
 }
 
-// <div class="modal-body">
-//   <h5>Congratulations, you've won the game!!</h5>
-// </div>
-
 function displayGameOverMessageOnLose () {
-  // const incorrectlyGuessedLettersCount = $('#letter-graveyard > div').length
   // If number of letters guessed is equal to maxParts
-    // if (incorrectlyGuessedLettersCount === 7) {
-  console.log('here is the number of incorrect guesses: ', game.bodyParts)
+  // console.log('here is the number of incorrect guesses: ', game.bodyParts)
   if (game.bodyParts === 7) {
     game.gameOver = 'Y'
     game.gameStatus = 2
@@ -186,10 +173,6 @@ function displayGameOverMessageOnLose () {
   }
 }
 
-/*
- * Hangman graphic with methods addBodyPart() and reset()
- */
-
 function addBodyPart () {
   const maxParts = 7
   if (game.bodyParts < maxParts) {
@@ -197,30 +180,6 @@ function addBodyPart () {
     $('#hangman-frame' + game.bodyParts).css('opacity', 1)
   }
 }
-
-// const hangmanGraphic = (function () {
-//   let bodyParts = 0
-//   const maxParts = 7
-//   return {
-//     addBodyPart: function () {
-//       if (bodyParts < maxParts) {
-//         ++bodyParts
-//         $('#hangman-frame' + bodyParts).css('opacity', 1)
-//       }
-//     },
-//
-//     reset: function () {
-//       $('.hangman-frames').css('opacity', 0)
-//       $('#hangman-frame0').css('opacity', 1)
-//       bodyParts = 0
-//       resetAlphabetKeypad()
-//       removeGraveyardLetters()
-//       removeCorrectlyGuessedLetters()
-//       removeFillInTheBlanksAroundOldWord()
-//       setWordToBeGuessed()
-//     }
-//   }
-// })()
 
 function resetAlphabetKeypad () {
   $('#alphabet-keypad > .letter-disabled').each(function (index, element) {
@@ -245,11 +204,6 @@ function removeFillInTheBlanksAroundOldWord () {
 }
 
 function setWordToBeGuessed () {
-  // currentWordFull = gamePhrase.content.phrase_content
-  // // set an all upper case version of the current word
-  // currentWord = currentWordFull.toUpperCase()
-  // // creates blocks in the DOM indicating where there are letters and spaces
-
   gamePhrase.content.phrase_content.split('').map(function (character) {
     const guessWordBlock = document.getElementById('word-to-guess')
 

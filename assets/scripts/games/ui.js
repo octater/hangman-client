@@ -20,15 +20,14 @@ const playGameSuccess = (data) => {
   $('.hangman-frames').css('opacity', 0)
   $('#hangman-frame0').css('opacity', 1)
   resetAlphabetKeypad()
-  removeGraveyardLetters()
   removeCorrectlyGuessedLetters()
   removeFillInTheBlanksAroundOldWord()
   setWordToBeGuessed()
-  console.log('playGameSuccess ', data)
+  // console.log('playGameSuccess ', data)
 }
 
 const playGameFailure = (error) => {
-  console.error('playGameFailure ', error)
+  // console.error('playGameFailure ', error)
   const title = 'ERROR'
   const body = 'Error with creating a new game -- ' + error.statusText
   $('#alert-modal-title').html(title)
@@ -37,7 +36,7 @@ const playGameFailure = (error) => {
 }
 
 const getPhraseSuccess = (data) => {
-  console.log('getPhraseSuccess', data)
+  // console.log('getPhraseSuccess', data)
   // gamePhrase.content = data.phrase
   gamePhrase.content = data.phrase
 
@@ -51,7 +50,7 @@ const getPhraseSuccess = (data) => {
 }
 
 const getPhraseFailure = (error) => {
-  console.error('getPhraseFailiure log', error)
+  // console.error('getPhraseFailiure log', error)
   const title = 'ERROR'
   const body = 'Error with getting phrase for the game -- ' + error.statusText
   $('#alert-modal-title').html(title)
@@ -73,10 +72,10 @@ const updateMoveFailure = (error) => {
 }
 
 const myStatsSuccess = (data) => {
-  console.log('here is the result of myStatsSuccess ', data)
+  // console.log('here is the result of myStatsSuccess ', data)
 
   const gameRecord = getRecord(data)
-  console.log('here is the game record: ', gameRecord)
+  // console.log('here is the game record: ', gameRecord)
   const title = 'Here are your game stats'
   const body = gameRecord
   $('#alert-modal-title').html(title)
@@ -94,11 +93,11 @@ const myStatsFailure = (error) => {
 }
 
 const purgeMyStatsSuccess = (data) => {
-  console.log('here is the result of purgeMyStatsSuccess ', data)
+  // console.log('here is the result of purgeMyStatsSuccess ', data)
 
   const totalGames = purgeGames(data)
   // const gameRecord = getRecord(data)
-  console.log('here is the totalGames: ', totalGames)
+  // console.log('here is the totalGames: ', totalGames)
   const title = 'Purge Games'
   const body = totalGames
   $('#alert-modal-title').html(title)
@@ -116,7 +115,7 @@ const purgeMyStatsFailure = (error) => {
 }
 
 const purgeGameSuccess = (data) => {
-  console.log('here is the result of myStatsSuccess ', data)
+  // console.log('here is the result of myStatsSuccess ', data)
 }
 
 const purgeGameFailure = (error) => {
@@ -130,7 +129,7 @@ const purgeGameFailure = (error) => {
 
 const getRecord = function (data) {
   const games = data.games
-  console.log('here is the const game ', games)
+  // console.log('here is the const game ', games)
   // const obj = {}
   let winner = 0
   let loser = 0
@@ -140,7 +139,7 @@ const getRecord = function (data) {
   games.forEach(function (item) {
     // obj.game = item.game_status
     // obj.cells = item.cells
-    console.log('here is the game_status is: ', item.game_status)
+    // console.log('here is the game_status is: ', item.game_status)
     // console.log('obj.cells is: ', obj.cells)
 
     if (item.game_status === 1) {
@@ -160,7 +159,7 @@ const getRecord = function (data) {
 
 const purgeGames = function (data) {
   const games = data.games
-  console.log('here is the const game ', games)
+  // console.log('here is the const game ', games)
   // const obj = {}
   const gamesToDelete = games.length
 
@@ -185,12 +184,6 @@ function resetAlphabetKeypad () {
   })
 }
 
-function removeGraveyardLetters () {
-  $('#letter-graveyard > div').each(function (index, element) {
-    $(element).remove()
-  })
-}
-
 function removeCorrectlyGuessedLetters () {
   $('#word-to-guess').each(function (index, element) {
     $(element).children().html('')
@@ -202,11 +195,6 @@ function removeFillInTheBlanksAroundOldWord () {
 }
 
 function setWordToBeGuessed () {
-  // gamePhrase.content.phrase_content
-  // // set an all upper case version of the current word
-  // currentWord = currentWordFull.toUpperCase()
-  // // creates blocks in the DOM indicating where there are letters and spaces
-
   gamePhrase.content.phrase_content.split('').map(function (character) {
     const guessWordBlock = document.getElementById('word-to-guess')
 

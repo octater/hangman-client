@@ -56,25 +56,28 @@ $modal-background: #bbdefb;
 // OUR ADDITION
 
 button .pull-right {
-    margin-top: 1em;
+  margin-top: 1em;
 }
 
-.hanghead{
-    display:block;
-    width: 80%;
-    margin: 1em auto;
+.hanghead {
+  display: block;
+  margin: 1em auto;
+  width: 80%;
 }
-/* Vertically align alpha keypad, hangman, and graveyard */
-#alphabet-keypad, #hangman-graphic, #letter-graveyard {
+
+// Vertically align the 3 columns
+
+#alphabet-keypad, #hangman-graphic, #games-listbox {
   display: inline-block;
-  vertical-align: middle;
   float: none;
+  vertical-align: middle;
 }
+
 .row {
   width: 100%;
 }
 
-// Styles for the alphabet keypad
+// Here are the styles and colors for the letter picker
 
 #alphabet-keypad {
   margin-left: 4%;
@@ -144,15 +147,17 @@ button .pull-right {
   text-align: center;
 }
 
-/* To be refactored for the letter graveyard */
-#letter-graveyard {
+// future place for games list box
+
+#games-listbox {
   max-width: 50%;
   padding: 3em;
   text-align: center;
 }
-#letter-graveyard img {
-  max-width: 100%;
-}
+
+// #games-listbox img {
+//   max-width: 100%;
+// }
 
 // Styles used to add fill in the blanks with the word that has to be guessed
 
@@ -175,13 +180,15 @@ button .pull-right {
   box-shadow: 0 .1em 0 0 $black;
 }
 
-/* Styles used to display the wrong user guesses in the graveyard */
-.grave-letter {
-  display: inline-block;
-  margin: .2em;
-  vertical-align: top;
-  font-size: 2em;
-  padding: 0.3em 0.25em;
-  border: 1px solid rgb(0,0,0);
-  border-radius: 100% 100% 0 0 ;
-}
+// Styles used to display the wrong user guesses in the graveyard
+
+// .grave-letter {
+//   border: 1px solid $black;
+//   border-radius: 100% 100% 0 0;
+//   display: inline-block;
+//   font-size: 2em;
+//   margin: .2em;
+//   padding: .3em .25em;
+//   vertical-align: top;
+//
+// }

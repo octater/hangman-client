@@ -20,9 +20,9 @@ const updateMove = function () {
     }
   }
 
-  console.log('here is my current move data from within updateMove: ', data)
-  console.log('here is game object in updateMove: ', game)
-  console.log('here is player1 object in updateMove: ', player1)
+  // console.log('here is my current move data from within updateMove: ', data)
+  // console.log('here is game object in updateMove: ', game)
+  // console.log('here is player1 object in updateMove: ', player1)
 
   return $.ajax({
     url: config.apiOrigin + '/games/' + game.game.id,
@@ -42,11 +42,11 @@ const getPhrase = function () {
 }
 
 const playGame = function () {
-  console.log('here is player1 in playGame api ', player1)
-  console.log('here is gamePhrase in playGame api', gamePhrase)
-  console.log('here is gamePhrase.content ', gamePhrase.content)
-  console.log('here is gamePhrase.content.id ', gamePhrase.content.id)
-  console.log('here is gamePhrase.content.phrase_content ', gamePhrase.content.phrase_content)
+  // console.log('here is player1 in playGame api ', player1)
+  // console.log('here is gamePhrase in playGame api', gamePhrase)
+  // console.log('here is gamePhrase.content ', gamePhrase.content)
+  // console.log('here is gamePhrase.content.id ', gamePhrase.content.id)
+  // console.log('here is gamePhrase.content.phrase_content ', gamePhrase.content.phrase_content)
 
   const data = {
     'game': {
