@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>HangMan</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Do not add `link` tags unless you know what you are doing -->
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+  <!-- Do not add `script` tags unless you know what you are doing -->
+  <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+  <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+
+</head>
+
+<body class="container-fluid">
+
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+        <!-- <a class="navbar-brand" href="#">Brand</a> -->
+      </div>
+      <!-- <Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <!-- <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+          <li><a href="#">Link</a></li> -->
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Actions<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#" data-toggle="modal" data-target="#signUp">Sign-up</a></li>
+              <li><a href="#" data-toggle="modal" data-target="#signIn">Sign-in</a></li>
+              <li><a href="#" data-toggle="modal" data-target="#signOut">Sign-out</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#" data-toggle="modal" data-target="#changePassword">Change password</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class='row'>
+    <div class='col-sm-8 hanghead'>
+      <h1 class="title">Hangman</h1></div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+
+      <div id="alphabet-keypad" class="col-sm-4">
+        <div class="letter-button">A</div>
+        <div class="letter-button">B</div>
+        <div class="letter-button">C</div>
+        <div class="letter-button">D</div>
+        <div class="letter-button">E</div>
+        <div class="letter-button">F</div>
+        <div class="letter-button">G</div>
+        <div class="letter-button">H</div>
+        <div class="letter-button">I</div>
+        <div class="letter-button">J</div>
+        <div class="letter-button">K</div>
+        <div class="letter-button">L</div>
+        <div class="letter-button">M</div>
+        <div class="letter-button">N</div>
+        <div class="letter-button">O</div>
+        <div class="letter-button">P</div>
+        <div class="letter-button">Q</div>
+        <div class="letter-button">R</div>
+        <div class="letter-button">S</div>
+        <div class="letter-button">T</div>
+        <div class="letter-button">U</div>
+        <div class="letter-button">V</div>
+        <div class="letter-button">W</div>
+        <div class="letter-button">X</div>
+        <div class="letter-button">Y</div>
+        <div class="letter-button">Z</div>
+      </div>
+
+      <div id="hangman-graphic" class="col-sm-3">
+        <img src="https://raw.githubusercontent.com/octater/hangman-client/master/assets/images/background.png">
+        <!-- <img src="assets/images/background.png"> -->
+        <!-- <img class="hangman-frames" id="hangman-frame0" src="./assets/images/hangman0a.jpg"> -->
+        <!-- <img class="hangman-frames" id="hangman-frame0" src="http://i.imgur.com/IxlFbvE.jpg" alt="Gallows" title="source: imgur.com"> -->
+        <img class="hangman-frames" id="hangman-frame0" src="https://raw.githubusercontent.com/octater/hangman-client/master/assets/images/hangman0a.jpg">
+        <img class="hangman-frames" id="hangman-frame1" src="https://raw.githubusercontent.com/octater/hangman-client/master/assets/images/hangman1a.jpg">
+        <img class="hangman-frames" id="hangman-frame2" src="https://raw.githubusercontent.com/octater/hangman-client/master/assets/images/hangman2a.jpg">
+        <img class="hangman-frames" id="hangman-frame3" src="https://raw.githubusercontent.com/octater/hangman-client/master/assets/images/hangman3a.jpg">
+        <img class="hangman-frames" id="hangman-frame4" src="https://raw.githubusercontent.com/octater/hangman-client/master/assets/images/hangman4a.jpg">
+        <img class="hangman-frames" id="hangman-frame5" src="https://raw.githubusercontent.com/octater/hangman-client/master/assets/images/hangman5a.jpg">
+        <img class="hangman-frames" id="hangman-frame6" src="https://raw.githubusercontent.com/octater/hangman-client/master/assets/images/hangman6a.jpg">
+        <img class="hangman-frames" id="hangman-frame7" src="https://raw.githubusercontent.com/octater/hangman-client/master/assets/images/hangman7a.jpg">
+
+        <div class="hangman-controls">
+          <button class="btn btn-success play">
+          Play
+          </button>
+          <button class="btn btn-success stats">
+          My Stats
+          </button>
+          <button class="btn btn-success purge">
+          Clear Games
+          </button>
+        </div>
+      </div>
+      <div id="games-listbox" class="col-sm-4">
+      </div>
+
+      <div class="row text-center">
+        <div id="word-to-guess"></div>
+      </div>
+
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="signUp" tabindex="-1" role="dialog" aria-labelledby="mySignUp">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="mySignUp">Sign-up</h4>
+          </div>
+          <div class="modal-body">
+            <form id="sign-up">
+              <div class="signUp-group">
+                <fieldset>
+                  <div><label>Email:</label></div>
+                  <input name="credentials[email]" type="text">
+                  <div><label>Password:</label></div>
+                  <input name="credentials[password]" type="password">
+                  <div><label>Password Confirm:</label></div>
+                  <input name="credentials[password_confirmation]" type="password">
+                </fieldset>
+              </div>
+              <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="signIn" tabindex="-1" role="dialog" aria-labelledby="mySignIn">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="mySignIn">Sign-in</h4>
+        </div>
+        <div class="modal-body">
+          <form id="sign-in">
+            <div class="signIn-group">
+              <!-- <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" placeholder="name"> -->
+              <fieldset>
+                <!-- <legend>Sign-in</legend> -->
+                <div><label>Email:</label></div>
+                <input name="credentials[email]" type="text">
+                <div><label>Password:</label></div>
+                <input name="credentials[password]" type="password">
+              </fieldset>
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="signOut" tabindex="-1" role="dialog" aria-labelledby="mySignOut">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="mySignOut">Sign-out</h4>
+        </div>
+        <div class="modal-body">
+          <form id="sign-out">
+            <div class="signout-group">
+              <!-- <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" placeholder="name"> -->
+            </div>
+            <button type="submit" class="btn btn-default">See Ya!</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="myChangePassword">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myChangePasswords">Change password</h4>
+        </div>
+        <div class="modal-body">
+          <form id="change-password">
+            <div class="changePassword-group">
+              <!-- <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" placeholder="name"> -->
+              <fieldset>
+                <!-- <legend>Change Password</legend> -->
+                <div><label>Old Password:</label></div>
+                <input type="password" name="passwords[old]">
+                <div><label>New Password:</label></div>
+                <input type="password" name="passwords[new]">
+                <!-- <input type="submit" name="submit" value="Change Password"> -->
+              </fieldset>
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="alert-modal" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 id="alert-modal-title" class="modal-title"></h4>
+        </div>
+        <div id="alert-modal-body" class="modal-body"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="congratulatory_message" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">You da the MAN! (or WOMAN!!)</h4>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-10 col-md-offset-1">
+                <p class="winmess"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn reset" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="gameover_message" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">You lost the game!</h4>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-10 col-md-offset-1">
+                <p class="losemess"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn reset" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</body>
+
+</html>
