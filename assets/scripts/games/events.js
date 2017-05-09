@@ -181,44 +181,6 @@ function addBodyPart () {
   }
 }
 
-function resetAlphabetKeypad () {
-  $('#alphabet-keypad > .letter-disabled').each(function (index, element) {
-    $(element).removeClass().addClass('letter-button')
-  })
-}
-
-function removeGraveyardLetters () {
-  $('#letter-graveyard > div').each(function (index, element) {
-    $(element).remove()
-  })
-}
-
-function removeCorrectlyGuessedLetters () {
-  $('#word-to-guess').each(function (index, element) {
-    $(element).children().html('')
-  })
-}
-
-function removeFillInTheBlanksAroundOldWord () {
-  $('#word-to-guess').html('')
-}
-
-function setWordToBeGuessed () {
-  gamePhrase.content.phrase_content.split('').map(function (character) {
-    const guessWordBlock = document.getElementById('word-to-guess')
-
-    const domElem = document.createElement('div')
-
-    if (character.match(/[a-z]/i)) {
-      domElem.className = 'character-block is-letter'
-    } else {
-      domElem.className = 'character-block'
-    }
-
-    guessWordBlock.appendChild(domElem)
-  })
-}
-
 const updtGame = function () {
   // event.preventDefault()
   // const data = getFormFields(event.target)
@@ -238,10 +200,5 @@ module.exports = {
   addHandlers,
   onMyStats,
   purgeMyStats,
-  setAPIOrigin,
-  resetAlphabetKeypad,
-  setWordToBeGuessed,
-  removeFillInTheBlanksAroundOldWord,
-  removeCorrectlyGuessedLetters,
-  removeGraveyardLetters
+  setAPIOrigin
 }

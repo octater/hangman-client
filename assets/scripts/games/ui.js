@@ -5,6 +5,7 @@ const api = require('./api')
 // const ui = require('./ui')
 const gamePhrase = require('../gamePhrase.js')
 const player1 = require('../player1.js')
+const misc = require('../misc.js')
 
 // const gamePlay = require('../gameplay.js')
 
@@ -19,10 +20,10 @@ const playGameSuccess = (data) => {
 
   $('.hangman-frames').css('opacity', 0)
   $('#hangman-frame0').css('opacity', 1)
-  resetAlphabetKeypad()
-  removeCorrectlyGuessedLetters()
-  removeFillInTheBlanksAroundOldWord()
-  setWordToBeGuessed()
+  misc.resetAlphabetKeys()
+  misc.removeLetters()
+  misc.removeBlanksAroundWord()
+  misc.setWord()
   // console.log('playGameSuccess ', data)
 }
 
@@ -176,38 +177,6 @@ const purgeGames = function (data) {
 
   const finalRecord = 'You have just deleted ' + gamesToDelete + ' games'
   return finalRecord
-}
-
-function resetAlphabetKeypad () {
-  $('#alphabet-keypad > .letter-disabled').each(function (index, element) {
-    $(element).removeClass().addClass('letter-button')
-  })
-}
-
-function removeCorrectlyGuessedLetters () {
-  $('#word-to-guess').each(function (index, element) {
-    $(element).children().html('')
-  })
-}
-
-function removeFillInTheBlanksAroundOldWord () {
-  $('#word-to-guess').html('')
-}
-
-function setWordToBeGuessed () {
-  gamePhrase.content.phrase_content.split('').map(function (character) {
-    const guessWordBlock = document.getElementById('word-to-guess')
-
-    const domElem = document.createElement('div')
-
-    if (character.match(/[a-z]/i)) {
-      domElem.className = 'character-block is-letter'
-    } else {
-      domElem.className = 'character-block'
-    }
-
-    guessWordBlock.appendChild(domElem)
-  })
 }
 
 module.exports = {

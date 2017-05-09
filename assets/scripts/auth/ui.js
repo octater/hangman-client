@@ -2,11 +2,15 @@
 
 const player1 = require('../player1.js')
 const game = require('../game.js')
+const misc = require('../misc.js')
 // const ui = require('../games/ui.js')
 
 const signUpSuccess = (data) => {
   // console.log('ui success: ', data)
   $('#signUp').modal('hide')
+  $('#signUp').on('hidden.bs.modal', function () {
+    $(this).find('input,textarea,select').val('').end()
+  })
 }
 
 const signUpFailure = (error) => {
@@ -27,6 +31,9 @@ const signInSuccess = (data) => {
   }
 
   $('#signIn').modal('hide')
+  $('#signIn').on('hidden.bs.modal', function () {
+    $(this).find('input,textarea,select').val('').end()
+  })
 }
 
 const signInFailure = (error) => {
@@ -49,9 +56,9 @@ const signOutSuccess = () => {
 
   $('.hangman-frames').css('opacity', 0)
   $('#hangman-frame0').css('opacity', 1)
-  resetAlphabetKeypad()
-  removeCorrectlyGuessedLetters()
-  removeFillInTheBlanksAroundOldWord()
+  misc.resetAlphabetKeys()
+  misc.removeLetters()
+  misc.removeBlanksAroundWord()
   $('#signOut').modal('hide')
 }
 
@@ -67,6 +74,9 @@ const signOutFailure = (error) => {
 const changePasswordSuccess = () => {
   // console.log('change password success')
   $('#changePassword').modal('hide')
+  $('#changePassword').on('hidden.bs.modal', function () {
+    $(this).find('input,textarea,select').val('').end()
+  })
 }
 
 const changePasswordFailure = (error) => {
@@ -76,22 +86,6 @@ const changePasswordFailure = (error) => {
   $('#alert-modal-title').html(title)
   $('#alert-modal-body').html(body)
   $('#alert-modal').modal('show')
-}
-
-function resetAlphabetKeypad () {
-  $('#alphabet-keypad > .letter-disabled').each(function (index, element) {
-    $(element).removeClass().addClass('letter-button')
-  })
-}
-
-function removeCorrectlyGuessedLetters () {
-  $('#word-to-guess').each(function (index, element) {
-    $(element).children().html('')
-  })
-}
-
-function removeFillInTheBlanksAroundOldWord () {
-  $('#word-to-guess').html('')
 }
 
 module.exports = {
